@@ -78,7 +78,7 @@ export default function CitySelector({
   }
 
   return (
-    <div className="flex h-full flex-col gap-6">
+    <div className="flex h-full min-w-0 flex-col gap-5 sm:gap-6">
       <div>
         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
           Cities
@@ -98,7 +98,7 @@ export default function CitySelector({
           type="text"
           value={query}
           disabled={!canAdd}
-          placeholder={atMax ? 'Maximum cities selected' : 'Search city (e.g. San Francisco)'}
+          placeholder={atMax ? 'Maximum cities selected' : 'Search city…'}
           className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm shadow-sm transition placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-100 disabled:cursor-not-allowed disabled:bg-slate-100"
           onChange={(e) => {
             setQuery(e.target.value)
@@ -138,16 +138,16 @@ export default function CitySelector({
         )}
       </div>
 
-      <div className="flex min-h-[2.5rem] flex-wrap gap-2">
+      <div className="flex min-h-[2.5rem] w-full max-w-full flex-wrap gap-2">
         {selected.length === 0 && (
           <span className="text-sm text-slate-400">No cities selected yet</span>
         )}
         {selected.map((city) => (
           <span
             key={city.id}
-            className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-900"
+            className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-indigo-100 bg-indigo-50 py-1 pl-3 pr-1.5 text-sm font-medium text-indigo-900"
           >
-            {city.name}
+            <span className="truncate">{city.name}</span>
             <button
               type="button"
               aria-label={`Remove ${city.name}`}
@@ -164,14 +164,14 @@ export default function CitySelector({
         <h3 className="text-xs font-semibold uppercase tracking-wide text-slate-500">
           Presets
         </h3>
-        <div className="mt-2 flex flex-wrap gap-2">
+        <div className="mt-2 flex w-full max-w-full flex-wrap gap-2">
           {PRESET_GROUPS.map((preset) => (
             <button
               key={preset.id}
               type="button"
               disabled={disabled}
               onClick={() => applyPreset(preset)}
-              className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-800 disabled:opacity-50"
+              className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50 hover:text-indigo-800 disabled:opacity-50"
             >
               {preset.label}
             </button>
@@ -211,14 +211,14 @@ export default function CitySelector({
         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
           Meeting duration
         </h2>
-        <div className="mt-3 flex gap-2">
+        <div className="mt-3 grid grid-cols-2 gap-2">
           {[30, 60].map((d) => (
             <button
               key={d}
               type="button"
               disabled={disabled}
               onClick={() => onDurationChange(d)}
-              className={`flex-1 rounded-lg border px-4 py-2.5 text-sm font-medium transition ${
+              className={`min-w-0 rounded-lg border px-3 py-2.5 text-sm font-medium transition sm:px-4 ${
                 duration === d
                   ? 'border-indigo-500 bg-indigo-600 text-white shadow-sm'
                   : 'border-slate-200 bg-white text-slate-700 hover:border-indigo-200 hover:bg-indigo-50'

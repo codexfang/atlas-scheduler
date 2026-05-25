@@ -55,28 +55,31 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-full overflow-x-hidden">
       <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+        <div className="mx-auto max-w-7xl px-3 py-4 sm:px-6 sm:py-5 lg:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h1 className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
               Atlas Scheduler
             </h1>
             <button
               type="button"
               onClick={toggleFormat}
-              className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:text-indigo-700"
+              className="shrink-0 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:text-indigo-700 sm:px-4 sm:py-2 sm:text-sm"
               aria-pressed={use12h}
             >
-              Time format: {use12h ? '12-hour' : '24-hour'}
+              <span className="sm:hidden">{use12h ? '12h' : '24h'}</span>
+              <span className="hidden sm:inline">
+                Time format: {use12h ? '12-hour' : '24-hour'}
+              </span>
             </button>
           </div>
         </div>
       </header>
 
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[minmax(280px,340px)_1fr]">
-          <aside className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm lg:sticky lg:top-8 lg:self-start">
+      <main className="mx-auto w-full max-w-7xl px-3 py-5 sm:px-6 sm:py-8 lg:px-8">
+        <div className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:gap-8">
+          <aside className="min-w-0 max-w-full rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6 lg:sticky lg:top-8 lg:self-start">
             <CitySelector
               selected={cities}
               onChange={handleCitiesChange}
@@ -87,7 +90,7 @@ export default function App() {
           </aside>
 
           <section
-            className={`rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-opacity duration-300 ${
+            className={`min-w-0 max-w-full overflow-hidden rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition-opacity duration-300 sm:p-6 ${
               ready ? 'opacity-100' : 'pointer-events-none opacity-60'
             }`}
             aria-disabled={!ready}
@@ -103,7 +106,7 @@ export default function App() {
           </section>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-5 min-w-0 max-w-full sm:mt-8">
           <MeetingOutput
             cities={cities}
             duration={duration}

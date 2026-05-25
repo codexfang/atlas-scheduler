@@ -15,7 +15,7 @@ export default function MeetingOutput({ cities, duration, selectedStartUtc, use1
 
   if (!selectedStartUtc || cities.length < 2) {
     return (
-      <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div className="min-w-0 max-w-full rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
           Meeting details
         </h2>
@@ -57,40 +57,40 @@ export default function MeetingOutput({ cities, duration, selectedStartUtc, use1
   const shareUrl = buildShareUrl(cities, duration)
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <div className="flex flex-wrap items-start justify-between gap-4">
-        <div>
+    <div className="min-w-0 max-w-full rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6">
+      <div className="flex flex-col gap-4">
+        <div className="min-w-0">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
             Meeting details
           </h2>
           <p className="mt-1 text-xs text-slate-500">Aligned across all selected cities</p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex w-full max-w-full flex-col gap-2 sm:flex-row sm:flex-wrap">
           <button
             type="button"
             onClick={() => copy(plainText, 'plain')}
-            className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50"
+            className="w-full min-w-0 rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-medium text-slate-700 shadow-sm transition hover:border-indigo-200 hover:bg-indigo-50 sm:w-auto"
           >
             {copied === 'plain' ? 'Copied!' : 'Copy to Clipboard'}
           </button>
           <button
             type="button"
             onClick={() => copy(slackText, 'slack')}
-            className="rounded-lg border border-indigo-200 bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700"
+            className="w-full min-w-0 rounded-lg border border-indigo-200 bg-indigo-600 px-4 py-2.5 text-sm font-medium text-white shadow-sm transition hover:bg-indigo-700 sm:w-auto"
           >
-            {copied === 'slack' ? 'Copied!' : 'Copy as Slack Message'}
+            {copied === 'slack' ? 'Copied!' : 'Copy as Slack'}
           </button>
           <button
             type="button"
             onClick={() => copy(shareUrl, 'link')}
-            className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50"
+            className="w-full min-w-0 rounded-lg border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50 sm:w-auto"
           >
             {copied === 'link' ? 'Link copied!' : 'Copy share link'}
           </button>
         </div>
       </div>
 
-      <pre className="mt-4 whitespace-pre-wrap rounded-lg bg-slate-50 p-4 font-sans text-sm leading-relaxed text-slate-800">
+      <pre className="mt-4 max-w-full overflow-x-auto whitespace-pre-wrap break-words rounded-lg bg-slate-50 p-3 font-sans text-sm leading-relaxed text-slate-800 sm:p-4">
         {plainText}
       </pre>
 

@@ -66,37 +66,50 @@ export default function Timeline({
 
   return (
     <div className="flex h-full flex-col">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <div>
+      <div className="mb-3 flex flex-col gap-2 sm:mb-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <div className="min-w-0">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-slate-500">
             Work hours overlap
           </h2>
-          <p className="mt-1 text-sm text-slate-600">
-            Default 9:00–17:00 local · {duration}-minute slots · green = available
+          <p className="mt-1 text-xs text-slate-600 sm:text-sm">
+            9:00–17:00 local · {duration} min · green = available
           </p>
         </div>
         {bestStartUtc != null && (
           <button
             type="button"
             onClick={() => onSelectSlot(bestStartUtc)}
-            className="rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-medium text-emerald-800 transition hover:bg-emerald-100"
+            className="w-full shrink-0 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-medium text-emerald-800 transition hover:bg-emerald-100 sm:w-auto sm:py-1.5"
           >
             Use recommended slot
           </button>
         )}
       </div>
 
-      <div className="flex-1 overflow-x-auto rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-        <div className="min-w-[720px]">
-          <div className="grid grid-cols-[7.5rem_1fr] gap-3 pb-2">
-            <div />
-            <div className="flex justify-between text-[10px] font-medium uppercase tracking-wider text-slate-400">
+      <div className="min-w-0 max-w-full overflow-hidden rounded-xl border border-slate-200 bg-slate-50/50">
+        <p className="border-b border-slate-100 px-3 py-2 text-[10px] font-medium uppercase tracking-wider text-slate-400 sm:hidden">
+          Swipe timeline →
+        </p>
+        <div className="w-full max-w-full overflow-x-auto overscroll-x-contain p-3 sm:p-4">
+          <div className="relative min-w-[640px] sm:min-w-[720px]">
+            <div className="mb-2 hidden justify-between text-[10px] font-medium uppercase tracking-wider text-slate-400 sm:flex">
               <span>Planning day (anchor: {cities[0].name})</span>
               <span>24h local axis per row</span>
             </div>
-          </div>
 
-          <div className="relative">
+            <div className="relative mb-2 h-10 sm:hidden">
+              <OverlapHighlighter
+                slots={slots}
+                slotStarts={slotStarts}
+                selectedStartUtc={selectedStartUtc}
+                durationMinutes={duration}
+                planningStartUtc={planningStartUtc}
+                planningEndUtc={planningEndUtc}
+                onSelectSlot={onSelectSlot}
+                bestStartUtc={bestStartUtc}
+              />
+            </div>
+
             <div className="relative">
               {cities.map((city) => (
                 <TimeRow
@@ -115,7 +128,7 @@ export default function Timeline({
                 />
               ))}
 
-              <div className="pointer-events-none absolute inset-0 grid grid-cols-[7.5rem_1fr] gap-3">
+              <div className="pointer-events-none absolute inset-0 hidden sm:grid sm:grid-cols-[5.5rem_minmax(0,1fr)] sm:gap-3">
                 <div />
                 <div className="relative">
                   <OverlapHighlighter

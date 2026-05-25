@@ -36,13 +36,13 @@ export default function TimeRow({
   }
 
   return (
-    <div className="grid grid-cols-[7.5rem_1fr] items-stretch gap-3 border-b border-slate-100 py-3 last:border-b-0">
-      <div className="flex flex-col justify-center pr-1">
-        <span className="text-sm font-semibold text-slate-800">{city.name}</span>
-        <span className="text-xs text-slate-500">{city.code}</span>
+    <div className="border-b border-slate-100 py-3 last:border-b-0 sm:grid sm:grid-cols-[5.5rem_minmax(0,1fr)] sm:items-stretch sm:gap-3">
+      <div className="mb-2 flex items-baseline justify-between gap-2 sm:mb-0 sm:flex-col sm:justify-center sm:pr-1">
+        <span className="truncate text-sm font-semibold text-slate-800">{city.name}</span>
+        <span className="shrink-0 text-xs text-slate-500 sm:mt-0.5">{city.code}</span>
       </div>
 
-      <div className="relative min-w-[720px] flex-1">
+      <div className="relative w-full min-w-0">
         <div className="relative h-12 overflow-hidden rounded-lg bg-slate-100/80">
           {workIntervals.map((interval) => {
             const left = utcToTimelinePercent(interval.startUtc, planningStartUtc, planningEndUtc)
@@ -67,7 +67,11 @@ export default function TimeRow({
 
         <div className="relative mt-1 flex h-4 justify-between text-[10px] text-slate-400">
           {hourMarkers.map((m, i) => (
-            <span key={i} className="w-0 shrink-0 translate-x-[-50%] text-center" style={{ flex: i === 24 ? '0' : '1' }}>
+            <span
+              key={i}
+              className="w-0 shrink-0 translate-x-[-50%] text-center"
+              style={{ flex: i === 24 ? '0' : '1' }}
+            >
               {m.label}
             </span>
           ))}
