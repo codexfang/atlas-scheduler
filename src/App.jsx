@@ -112,10 +112,6 @@ export default function App() {
           />
         </div>
       </main>
-
-      <footer className="mx-auto max-w-7xl px-4 pb-10 text-center text-xs text-slate-400 sm:px-6 lg:px-8">
-        ATLAS SCHEDULER — built for distributed teams · times computed with Intl API (DST-aware)
-      </footer>
     </div>
   )
 }
