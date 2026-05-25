@@ -57,14 +57,11 @@ export default function App() {
   return (
     <div className="min-h-screen">
       <header className="border-b border-slate-200 bg-white/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-                Atlas Scheduler
-              </h1>
-              <p className="mt-2 text-slate-600">Global time coordination made simple</p>
-            </div>
+        <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+              Atlas Scheduler
+            </h1>
             <button
               type="button"
               onClick={toggleFormat}
