@@ -107,6 +107,8 @@ export default function Timeline({
                 planningEndUtc={planningEndUtc}
                 onSelectSlot={onSelectSlot}
                 bestStartUtc={bestStartUtc}
+                anchorTimezone={cities[0].timeZone}
+                use12h={use12h}
               />
             </div>
 
@@ -140,6 +142,8 @@ export default function Timeline({
                     planningEndUtc={planningEndUtc}
                     onSelectSlot={onSelectSlot}
                     bestStartUtc={bestStartUtc}
+                    anchorTimezone={cities[0].timeZone}
+                    use12h={use12h}
                   />
                 </div>
               </div>
