@@ -31,6 +31,7 @@ export default function OverlapHighlighter({
   const durationMs = durationMinutes * 60 * 1000
   const [hoveredSlot, setHoveredSlot] = useState(null)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [clickedSlot, setClickedSlot] = useState(null)
 
   const handleMouseEnter = (startUtc, e) => {
     setHoveredSlot(startUtc)
@@ -43,6 +44,12 @@ export default function OverlapHighlighter({
 
   const handleMouseLeave = () => {
     setHoveredSlot(null)
+  }
+
+  const handleClick = (startUtc) => {
+    setClickedSlot(startUtc)
+    setTimeout(() => setClickedSlot(null), 200)
+    onSelectSlot(startUtc)
   }
 
   return (
@@ -70,17 +77,17 @@ export default function OverlapHighlighter({
             <button
               key={startUtc}
               type="button"
-              onClick={() => onSelectSlot(startUtc)}
+              onClick={() => handleClick(startUtc)}
               onMouseEnter={(e) => handleMouseEnter(startUtc, e)}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
-              className={`absolute top-1 bottom-1 rounded-md border transition-all duration-200 ${
+              className={`absolute top-1 bottom-1 rounded-md border transition-all duration-150 ease-out active:scale-90 ${
                 isSelected
                   ? 'z-10 border-indigo-500 bg-indigo-500/35 shadow-md ring-2 ring-indigo-300'
                   : isBest
                     ? 'border-emerald-500/60 bg-emerald-500/25 hover:bg-emerald-500/35'
                     : 'border-emerald-600/30 bg-emerald-500/15 hover:bg-emerald-500/30'
-              }`}
+              } ${clickedSlot === startUtc ? 'scale-105' : ''}`}
               style={{ left: `${left}%`, width: `${Math.max(width, 0.8)}%` }}
             />
           )
